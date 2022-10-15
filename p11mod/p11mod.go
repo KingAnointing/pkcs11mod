@@ -238,8 +238,8 @@ func (ll *llBackend) SetPIN(sh pkcs11.SessionHandle, oldpin, newpin string) erro
 		return err
 	}
 
-	if sessionErr := session.session.SetPIN(oldpin, newpin); sessionErr != nil {
-		return pkcs11.Error(pkcs11.CKR_FUNCTION_NOT_SUPPORTED)
+	if err := session.session.SetPIN(oldpin, newpin); err != nil {
+		return err
 	}
 
 	return nil
