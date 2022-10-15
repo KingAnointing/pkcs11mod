@@ -233,10 +233,16 @@ func (ll *llBackend) SetPIN(sh pkcs11.SessionHandle, oldpin, newpin string) erro
 	// return pkcs11.Error(pkcs11.CKR_FUNCTION_NOT_SUPPORTED)
 
 	session, err := ll.getSessionByHandle(sh)
+
 	if err != nil {
+		return err
+	}
+
+	if sessionErr := session.session.SetPIN(oldpin, newpin); sessionErr != nil {
 		return pkcs11.Error(pkcs11.CKR_FUNCTION_NOT_SUPPORTED)
 	}
-	
+
+	return nil
 }
 
 // Only call this when ll.sessionsMutex is locked for reading.
