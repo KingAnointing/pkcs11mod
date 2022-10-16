@@ -229,7 +229,6 @@ func (ll *llBackend) InitPIN(sh pkcs11.SessionHandle, pin string) error {
 
 func (ll *llBackend) SetPIN(sh pkcs11.SessionHandle, oldpin, newpin string) error {
 	session, err := ll.getSessionByHandle(sh)
-
 	if err != nil {
 		return err
 	}
